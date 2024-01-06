@@ -1,10 +1,15 @@
 import { prisma } from "@/db"
 import Link from "next/link"
+import ToDoItem from "@/components/ToDoItem"
 
+// have this function here outside of Home component so that it can be used anywhere
+function getToDos() {
+  return prisma.todo.findMany()
+}
 
 export default async function Home() {
-  const todos = await prisma.todo.findMany()
-  // await prisma.todo.create({ data: {title: 'test2', complete: false} })
+  const todos = await getToDos()
+  // await prisma.todo.create({ data: {title: 'test3', complete: false} })
 
   return (
     <>
@@ -19,7 +24,7 @@ export default async function Home() {
       </header>
       <ul className="pl-4">
         {todos.map(todo => (
-          <li key={todo.id}>{todo.title}</li>
+          <ToDoItem key={todo.id} {...todo}/>
         ))}
       </ul>
     </>
