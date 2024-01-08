@@ -1,3 +1,4 @@
+// Best practice for instantiating PrismaClient with Next.js
 import { PrismaClient } from "@prisma/client"
 
 const globalForPrisma = global as unknown as {
