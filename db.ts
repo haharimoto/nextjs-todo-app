@@ -12,3 +12,5 @@ export const prisma =
   })
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+
+// The code ensures that only a single instance of PrismaClient is created and reused across the entire Next.js application. This pattern is particularly important in a serverless environment or during development to avoid unnecessary database connections and potential performance issues.
