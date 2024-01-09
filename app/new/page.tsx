@@ -9,7 +9,7 @@ async function createToDo(data: FormData) {
     throw new Error("invalid title")
   }
   await prisma.todo.create({ data: { title, complete: false } })
-  console.log('ran createToDo function')
+  // console.log('ran createToDo function')
   redirect("/")
 }
 
