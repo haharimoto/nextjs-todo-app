@@ -36,13 +36,13 @@
 //     </>
 //   )
 // }
+
 import Image from "next/image"
 interface Coffee {
   id: number
   title: string
   ingredients: string
   image: string
-  // include other properties if they exist
 }
 
 async function getData() {
@@ -53,25 +53,22 @@ async function getData() {
   return await res.json()
 }
 
-
 export default async function Home() {
-  const data = await getData();
-
+  const data = await getData()
   // console.log(data, 'data')
   return (
     <>
       <ul>
         {data.map((el: Coffee) => (
           <li key={el.id}>
-            <h1>{el.title}</h1>
+            <h1><strong>{el.title}</strong></h1>
             <p>Ingredients:{el.ingredients}</p>
-            <img className="h-60 w-60 object-cover" src={el.image} alt="" />
-            {/* <Image
+            <Image
               src={el.image}
-              width={400}
-              height={500}
+              width={200}
+              height={300}
               alt=''
-            /> */}
+            />
             <br />
           </li>
         ))}
@@ -79,13 +76,3 @@ export default async function Home() {
     </>
   )
 }
-
-// random comment
-
-// export default function Home() {
-//   return (
-//     <>
-//       Nextjs App
-//     </>
-//   )
-// }
