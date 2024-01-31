@@ -46,7 +46,7 @@ interface Coffee {
 }
 
 async function getData() {
-  const res = await fetch('https://api.sampleapis.com/coffee/hot')
+  const res = await fetch('https://api.sampleapis.com/coffee/hot', {cache: 'no-store'})
   if (!res.ok) {
     throw new Error('failed to fetch data')
   }
@@ -55,11 +55,6 @@ async function getData() {
 
 
 export default async function Home() {
-  // const res = await fetch('https://api.sampleapis.com/coffee/hot')
-  // if (!res.ok) {
-  //   throw new Error('failed to fetch data')
-  // }
-  // const data = await res.json()
   const data = await getData();
 
   // console.log(data, 'data')
