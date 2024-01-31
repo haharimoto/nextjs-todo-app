@@ -1,48 +1,75 @@
-import { prisma } from "@/db"
-import Link from "next/link"
-import ToDoItem from "@/components/ToDoItem"
+// import { prisma } from "@/db"
+// import Link from "next/link"
+// import ToDoItem from "@/components/ToDoItem"
 
-// have this function here outside of Home component so that it can be used anywhere
-function getToDos() {
-  return prisma.todo.findMany()
+// // have this function here outside of Home component so that it can be used anywhere
+// function getToDos() {
+//   return prisma.todo.findMany()
+// }
+
+// async function toggleToDo(id: string, complete: boolean) {
+//   "use server"
+//   await prisma.todo.update({ where: { id }, data: { complete } })
+//   // console.log(id, complete)
+// }
+
+// export default async function Home() {
+//   const todos = await getToDos()
+//   // await prisma.todo.create({ data: {title: 'test3', complete: false} })
+
+//   return (
+//     <>
+//       <header className="flex justify-between">
+//         <h1 className="text-2xl">TODOs</h1>
+//         <Link
+//           href="/new"
+//           className="border border-slate-300 text-slate-300 px-2 py-1 rounded hover:bg-slate-700 focus-within:bg-slate-700 outline-none"
+//         >
+//           Jump to New Page
+//         </Link>
+//       </header>
+//       <ul className="pl-4">
+//         {todos.map(todo => (
+//           <ToDoItem key={todo.id} toggleToDo={toggleToDo} {...todo}/>
+//         ))}
+//       </ul>
+//     </>
+//   )
+// }
+interface Coffee {
+  id: number
+  title: string
+  ingredients: string
+  image: string
+  // include other properties if they exist
 }
 
-async function toggleToDo(id: string, complete: boolean) {
-  "use server"
-  await prisma.todo.update({ where: { id }, data: { complete } })
-  // console.log(id, complete)
+export async function getData() {
+  const res = await fetch('https://api.sampleapis.com/coffee/hot', {cache: 'no-store'})
+  if (!res.ok) {
+    throw new Error('failed to fetch data')
+  }
+  return res.json()
 }
+
 
 export default async function Home() {
-  const todos = await getToDos()
-  // await prisma.todo.create({ data: {title: 'test3', complete: false} })
-
+  const data = await getData()
+  console.log(data, 'data')
   return (
     <>
-      <header className="flex justify-between">
-        <h1 className="text-2xl">TODOs</h1>
-        <Link
-          href="/new"
-          className="border border-slate-300 text-slate-300 px-2 py-1 rounded hover:bg-slate-700 focus-within:bg-slate-700 outline-none"
-        >
-          Jump to New Page
-        </Link>
-      </header>
-      <ul className="pl-4">
-        {todos.map(todo => (
-          <ToDoItem key={todo.id} toggleToDo={toggleToDo} {...todo}/>
+      <ul>
+        {data.map((el: Coffee) => (
+          <li key={el.id}>
+            <h1>{el.title}</h1>
+            <p>Ingredients:{el.ingredients}</p>
+            <img className="h-60 w-60 object-cover" src={el.image} alt="" />
+            <br />
+          </li>
         ))}
       </ul>
     </>
   )
 }
-
-// export default function Home() {
-//   return (
-//     <>
-//       Next.js
-//     </>
-//   )
-// }
 
 // random comment
