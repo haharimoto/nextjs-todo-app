@@ -45,7 +45,7 @@ interface Coffee {
   // include other properties if they exist
 }
 
-export async function getData() {
+async function getData() {
   const res = await fetch('https://api.sampleapis.com/coffee/hot')
   if (!res.ok) {
     throw new Error('failed to fetch data')
