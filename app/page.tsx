@@ -36,6 +36,7 @@
 //     </>
 //   )
 // }
+import Image from "next/image"
 interface Coffee {
   id: number
   title: string
@@ -64,6 +65,12 @@ export default async function Home() {
             <h1>{el.title}</h1>
             <p>Ingredients:{el.ingredients}</p>
             <img className="h-60 w-60 object-cover" src={el.image} alt="" />
+            {/* <Image
+              src={el.image}
+              width={400}
+              height={500}
+              alt=''
+            /> */}
             <br />
           </li>
         ))}
@@ -73,3 +80,11 @@ export default async function Home() {
 }
 
 // random comment
+
+// export default function Home() {
+//   return (
+//     <>
+//       Nextjs App
+//     </>
+//   )
+// }
