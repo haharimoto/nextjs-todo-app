@@ -21,6 +21,7 @@ export default function Page() {
       </header>
       <form action={createToDo} className="flex gap-2 flex-col">
         <input
+          autoFocus
           type="text"
           name="title"
           className="border border-slate-300 bg-transparent rounded px-2 py-1 outline-none focus-within:border-slate-100"
